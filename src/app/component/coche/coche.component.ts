@@ -40,7 +40,7 @@ export class CocheComponent implements OnInit {
   tipos: Tipo[] = [];
   titulo: string = '';
   opc: string = '';
-  coche = new Coche();
+  coche: Coche = new Coche();
   op = 0;
   visible: boolean = false;
 
@@ -60,22 +60,37 @@ export class CocheComponent implements OnInit {
 
   listarCoches() {
     this.cocheService.getCoches().subscribe({
-      next: (data) => this.coches = data,
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo cargar la lista de coches' })
+      next: (data) => (this.coches = data),
+      error: () =>
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No se pudo cargar la lista de coches',
+        }),
     });
   }
 
   listarMarcas() {
     this.marcaService.getMarcas().subscribe({
-      next: (data) => this.marcas = data,
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo cargar la lista de marcas' })
+      next: (data) => (this.marcas = data),
+      error: () =>
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No se pudo cargar la lista de marcas',
+        }),
     });
   }
 
   listarTipos() {
     this.tipoService.getTipos().subscribe({
-      next: (data) => this.tipos = data,
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo cargar la lista de tipos' })
+      next: (data) => (this.tipos = data),
+      error: () =>
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No se pudo cargar la lista de tipos',
+        }),
     });
   }
 
@@ -96,23 +111,28 @@ export class CocheComponent implements OnInit {
         this.op = 1;
         this.visible = true;
       },
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo cargar el coche' })
+      error: () =>
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'No se pudo cargar el coche',
+        }),
     });
   }
 
   onSelectMarca(event: any) {
     const marcaId = event.value;
-    const marcaSeleccionada = this.marcas.find(marca => marca.id === marcaId);
+    const marcaSeleccionada = this.marcas.find((marca) => marca.id === marcaId);
     if (marcaSeleccionada) {
-      this.coche.idMarca = marcaSeleccionada;
+      this.coche.marca = marcaSeleccionada;
     }
   }
 
   onSelectTipo(event: any) {
     const tipoId = event.value;
-    const tipoSeleccionado = this.tipos.find(tipo => tipo.id === tipoId);
+    const tipoSeleccionado = this.tipos.find((tipo) => tipo.id === tipoId);
     if (tipoSeleccionado) {
-      this.coche.idTipo = tipoSeleccionado;
+      this.coche.tipo = tipoSeleccionado;
     }
   }
 
@@ -142,13 +162,12 @@ export class CocheComponent implements OnInit {
             });
             this.listarCoches();
           },
-          error: () => {
+          error: () =>
             this.messageService.add({
               severity: 'error',
               summary: 'Error',
               detail: 'No se pudo eliminar el coche',
-            });
-          },
+            }),
         });
       },
     });

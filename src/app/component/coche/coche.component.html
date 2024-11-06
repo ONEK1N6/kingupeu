@@ -21,8 +21,8 @@
         <td>{{ coche.id }}</td>
         <td>{{ coche.placa }}</td>
         <td>{{ coche.puertas }}</td>
-        <td>{{ coche.idMarca?.nombre }}</td>
-        <td>{{ coche.idTipo?.nombre }}</td>
+        <td>{{ coche.marca?.nombre }}</td> <!-- Muestra el nombre de la Marca si existe -->
+        <td>{{ coche.tipo?.nombre }}</td> <!-- Muestra el nombre del Tipo si existe -->
         <td>
           <!-- Botón para Editar -->
           <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded"
@@ -43,15 +43,15 @@
       <input pInputText [(ngModel)]="coche.placa" name="placa" id="placa" class="flex-auto" autocomplete="off" />
 
       <label for="puertas" class="font-semibold w-6rem">Puertas:</label>
-      <input pInputText [(ngModel)]="coche.puertas" name="puertas" id="puertas" class="flex-auto" autocomplete="off" type="number" />
+      <input pInputText [(ngModel)]="coche.puertas" name="puertas" id="puertas" class="flex-auto" type="number" autocomplete="off" />
 
-      <label for="marcaId" class="font-semibold w-6rem">Marca:</label>
-      <p-dropdown [options]="marcas" [(ngModel)]="coche.idMarca.id" 
+      <label for="marca" class="font-semibold w-6rem">Marca:</label>
+      <p-dropdown [options]="marcas" [(ngModel)]="coche.marca" 
                   optionLabel="nombre" optionValue="id" placeholder="Seleccione una Marca" 
                   (onChange)="onSelectMarca($event)"></p-dropdown>
 
-      <label for="tipoId" class="font-semibold w-6rem">Tipo:</label>
-      <p-dropdown [options]="tipos" [(ngModel)]="coche.idTipo.id" 
+      <label for="tipo" class="font-semibold w-6rem">Tipo:</label>
+      <p-dropdown [options]="tipos" [(ngModel)]="coche.tipo" 
                   optionLabel="nombre" optionValue="id" placeholder="Seleccione un Tipo" 
                   (onChange)="onSelectTipo($event)"></p-dropdown>
     </div>
